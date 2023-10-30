@@ -1,6 +1,19 @@
 <p style="color: green"><%= notice %></p>
 
 <%= render @post %>
+<h2>Comments</h2>
+<div id="comments">
+  <%= render @post.comments.reverse%>
+  </div>
+
+  <%= form_for [@post, Comment.new], remote: true do |f| %>
+  <p>
+    <%= f.label :body, "New Comment" %><br />
+    <%= f.hidden_field :post_id %>
+    <%= f.text_area :body %>
+  </p>
+  <p><%= f.submit "Add Comment" %></p>
+  <%end%>
 
 <div>
   <%= link_to "Edit this post", edit_post_path(@post) %> |
